@@ -61,7 +61,6 @@
     <Compile Include="Patcher\MergeSettings.cs" />
     <Compile Include="Patcher\MergelessPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MergelessStocks.cs" />
     <Compile Include="Patcher\ThingFilterUIPatcher.cs" />
     <Compile Include="Patcher\WorkGiver_Mergeless.cs" />
   </ItemGroup>
