@@ -5,7 +5,7 @@ using Verse.AI;
 
 namespace Zenth_MergelessStocks
 {
-    [HarmonyPatch(typeof(WorkGiver_Merge), "JobOnThing")]
+    [HarmonyPatch(typeof(WorkGiver_Merge), nameof(WorkGiver_Merge.JobOnThing))]
     internal static class WorkGiver_Mergeless
     {
         private static void Postfix(ref Job __result, Thing t)

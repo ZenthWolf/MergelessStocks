@@ -10,18 +10,18 @@ namespace Zenth_MergelessStocks
     [HarmonyPatch(typeof(StorageSettings), nameof(StorageSettings.ExposeData))]
     public static class MergeSettings
     {
-        //Why does readonly work???
+        //Why does readonly work??? Pointer is likely readonly, pointed content in heap is not?
         public static readonly HashSet<StorageSettings> noMerge = new HashSet<StorageSettings>();
 
         public static void Postfix(StorageSettings __instance)
         {
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                if (!__instance.IsMerging()) Scribe.saver.WriteElement("noMerging", 1.ToString());
+                if (!__instance.IsMerging()) Scribe.saver.WriteElement("noMerging", "1");
             }
             else if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
-                if( Convert.ToBoolean(ScribeExtractor.ValueFromNode(Scribe.loader.curXmlParent["noMerging"], 0)) )
+                if( ScribeExtractor.ValueFromNode(Scribe.loader.curXmlParent["noMerging"], 0) == 1 )
                 {
                     __instance.SetNoMerge();
                 }

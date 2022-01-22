@@ -22,24 +22,18 @@ namespace Zenth_MergelessStocks
         public static void Postfix(ref Rect rect)
         {
             if (selected == null) return;
-            
-            // See how disabling this breaks something- it'll be cool!
-            if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.Escape))
-            {
-                UI.UnfocusCurrentControl();
-                Event.current.Use();
-            }
 
             var settings = selected.GetStoreSettings();
 
             //rect changes in method, start up from search+clear (48 px) + buffers (3) + DrawArea height (30)
             Rect drawArea = new Rect(rect.xMin, rect.yMin - 48f - 3f - 30f, rect.width, 24f);
 
+            //Is there a timing issue??? Testing shows no, but the reading feels like you need to be extremely lucky to "catch" the checkbox at the right time...
             var checkMerge = settings.IsMerging();
             var wasMerge = checkMerge;
 
-            TooltipHandler.TipRegion(drawArea, "This tooltip better not be why it broke");
-            Widgets.CheckboxLabeled(drawArea, "Merge Stockpile", ref checkMerge, placeCheckboxNearText: true);
+            TooltipHandler.TipRegion(drawArea, "Enable/Disable Automatic Merge Assignments Here");
+            Widgets.CheckboxLabeled(drawArea, "Merge Stock Here", ref checkMerge, placeCheckboxNearText: true);
 
             if(wasMerge ^ checkMerge)
             {
