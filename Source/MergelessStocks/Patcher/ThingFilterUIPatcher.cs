@@ -29,13 +29,23 @@ namespace Zenth_MergelessStocks
                 UI.UnfocusCurrentControl();
                 Event.current.Use();
             }
-            
+
+            var settings = selected.GetStoreSettings();
+
             //rect changes in method, start up from search+clear (48 px) + buffers (3) + DrawArea height (30)
             Rect drawArea = new Rect(rect.xMin, rect.yMin - 48f - 3f - 30f, rect.width, 24f);
 
+            var checkMerge = settings.IsMerging();
+            var wasMerge = checkMerge;
+
             TooltipHandler.TipRegion(drawArea, "This tooltip better not be why it broke");
-            bool test2 = true;
-            Widgets.CheckboxLabeled(drawArea, "Merge Stockpile", ref MergelessStocks.Instance.test, placeCheckboxNearText: true);
+            Widgets.CheckboxLabeled(drawArea, "Merge Stockpile", ref checkMerge, placeCheckboxNearText: true);
+
+            if(wasMerge ^ checkMerge)
+            {
+                if (checkMerge) settings.SetMerge();
+                else settings.SetNoMerge();
+            }
         }
     }
 }

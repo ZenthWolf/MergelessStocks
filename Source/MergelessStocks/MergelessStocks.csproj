@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patcher\MergeSettings.cs" />
     <Compile Include="Patcher\MergelessPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MergelessStocks.cs" />
