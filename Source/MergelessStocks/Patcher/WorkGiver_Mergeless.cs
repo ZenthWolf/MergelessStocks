@@ -15,7 +15,7 @@ namespace Zenth_MergelessStocks
                 ISlotGroupParent zone = t.GetSlotGroup().parent;
                 if (zone is Zone_Stockpile)
                 {
-                    if( (zone as Zone_Stockpile).settings.Priority == StoragePriority.Low)
+                    if( !(zone as Zone_Stockpile).settings.IsMerging())
                     {
                         __result = null;
                     }
